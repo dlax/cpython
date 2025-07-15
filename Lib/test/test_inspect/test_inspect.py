@@ -171,6 +171,7 @@ class TestPredicates(IsTestBase):
             # Clear traceback and all the frames and local variables hanging to it.
             tb = None
         self.istest(inspect.isfunction, 'mod.spam')
+        self.istest(inspect.isfunction, 'mod.cached')
         self.istest(inspect.isfunction, 'mod.StupidGit.abuse')
         self.istest(inspect.ismethod, 'git.argue')
         self.istest(inspect.ismethod, 'mod.custom_method')
@@ -636,6 +637,7 @@ class TestRetrievingSourceCode(GetSourceBase):
     def test_getfunctions(self):
         functions = inspect.getmembers(mod, inspect.isfunction)
         self.assertEqual(functions, [('after_closing', mod.after_closing),
+                                     ('cached', mod.cached),
                                      ('eggs', mod.eggs),
                                      ('lobbest', mod.lobbest),
                                      ('spam', mod.spam)])

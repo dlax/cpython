@@ -76,3 +76,20 @@ from test.test_doctest.decorator_mod import decorator
 @decorator
 def func_with_docstring_wrapped():
     """Some unrelated info."""
+
+
+import functools
+
+
+@functools.cache
+def cached_func_with_doctest(value):
+    """
+    >>> cached_func_with_doctest(1)
+    -1
+    """
+    return -value
+
+
+@functools.cache
+def cached_func_without_docstring(value):
+    return value + 1

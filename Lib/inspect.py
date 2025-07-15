@@ -280,7 +280,7 @@ def isfunction(object):
         __dict__        namespace which is supporting arbitrary function attributes
         __closure__     a tuple of cells or None
         __type_params__ tuple of type parameters"""
-    return isinstance(object, types.FunctionType)
+    return isinstance(object, (types.FunctionType, functools._lru_cache_wrapper))
 
 def _has_code_flag(f, flag):
     """Return true if ``f`` is a function (or a method or functools.partial
@@ -293,6 +293,7 @@ def _has_code_flag(f, flag):
     f = functools._unwrap_partial(f)
     if not (isfunction(f) or _signature_is_functionlike(f)):
         return False
+    f = unwrap(f)
     return bool(f.__code__.co_flags & flag)
 
 def isgeneratorfunction(obj):
